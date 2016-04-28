@@ -1,6 +1,6 @@
 // Drawing (FOREST)
-var trees = [];
-var barn;
+var trees_BG = [];
+var barn, bush1, bush2;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -8,11 +8,14 @@ function setup() {
 
   //load objects
   for (var i = 0; i < 100; i++) {
-    trees[i] = new Tree(i, random(10,30), random(20,180));
+    trees_BG[i] = new Tree(i, random(10,30), random(20,180));
   }
 
   //load images
   barn = loadImage("images/barn.png");
+  bush1= loadImage("images/bush1.png");
+  bush2= loadImage("images/bush2.png");
+
   drawBackProps();
 }
 
@@ -24,6 +27,7 @@ function draw() {
   drawStructures();
   drawFrontProps();
   drawGround();
+  setMood();
 }
 
 function drawGround() {
@@ -37,19 +41,60 @@ function drawStructures() {
   var offsetX = mouseX/16;
   var offsetY = mouseY/16;
   image(barn,width/2-offsetX,height/4*3-138-offsetY);
+
+  //orb
+  stroke(255, 153, 51);
+  strokeWeight(40);
+  point(width/2+70-offsetX,150);
+  noStroke();
 }
 
 function drawBackProps() {
-  //trees
+  //trees_BG
   rectMode(CORNER);
-  for (var i = 0; i < 100; i++) {
-    trees[i].display();
-    trees[i].move();
+  for (var i = 0; i < trees_BG.length; i++) {
+    trees_BG[i].display();
+    trees_BG[i].move();
   }
 }
 
 function drawFrontProps() {
-  //trees
+  var offsetX = mouseX/16;
+  var offsetY = mouseY/16;
+  rectMode(CORNER);
+
+  //mid trees
+  fill(35, 53, 61, 255);
+  rect(width/5*4-offsetX, 0, 40, height);
+  rect(width/5*4+50-offsetX, 0, 40, height);
+  rect(width/5*4+180-offsetX, 0, 40, height);
+  fill(23, 36, 41,255);
+  rect(width/7-offsetX, 0, 40, height);
+  rect(width/7+50-offsetX, 0, 40, height);
+  rect(width/5+180-offsetX, 0, 40, height);
+
+  //mid shrubs
+  offsetX = mouseX/24;
+  offsetY = mouseY/16;
+  image(bush2,width/4+42-offsetX, height/4*3-82-offsetY);
+  image(bush1,width/4+30-offsetX/2, height/4*3-82-offsetY);
+
+  //top shrubs/trees
+  offsetX = mouseX/32;
+  offsetY = mouseY/16;
+  fill(0,0,0,255);
+  rect(width/5+offsetX, 0, 50, height);
+  rect(width/5+80+offsetX, 0, 50, height);
+  rect(width/5*4+offsetX, 0, 50, height);
+  rect(width/5*4+80+offsetX, 0, 50, height);
+
+   image(bush1,width/6+offsetX*2, height/4*3-82-offsetY);
+}
+
+function setMood() { //color overlay
+  rectMode(CORNER);
+  fill(220,20,0,30);
+  rect(0,0,width,height);
 }
 
 function Tree(position,width,opacity) {
