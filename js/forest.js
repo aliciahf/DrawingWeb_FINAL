@@ -27,14 +27,24 @@ function draw() {
   drawStructures();
   drawFrontProps();
   drawGround();
-  setMood();
+  // setMood();
 }
 
 function drawGround() {
+  //grass
   var offsetY = mouseY/16;
   rectMode(CORNER);
   fill(0,0,0);
   rect(0,height/4*3-offsetY,width,300);
+
+  //road
+  var offsetX = mouseX/8;
+  var offsetY = mouseY/16;
+  fill(70, 122, 140,100);
+  quad(width/2-80+offsetX*2, height, //bottom left
+    width/2+100+offsetX*3, height, //bottom right
+    width/2+85-offsetX/2, height/4*3-offsetY, //top right
+    width/2+65-offsetX/2, height/4*3-offsetY); //top left
 }
 
 function drawStructures() {
@@ -44,8 +54,8 @@ function drawStructures() {
 
   //orb
   stroke(255, 153, 51);
-  strokeWeight(40);
-  point(width/2+70-offsetX,150);
+  strokeWeight(30);
+  point(width/2+75-offsetX,130);
   noStroke();
 }
 
