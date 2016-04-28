@@ -27,7 +27,7 @@ function draw() {
   drawStructures();
   drawFrontProps();
   drawGround();
-  // setMood();
+  setMood();
 }
 
 function drawGround() {
@@ -40,7 +40,7 @@ function drawGround() {
   //road
   var offsetX = mouseX/8;
   var offsetY = mouseY/16;
-  fill(70, 122, 140,100);
+  fill(70, 122, 140, 70);
   quad(width/2-80+offsetX*2, height, //bottom left
     width/2+100+offsetX*3, height, //bottom right
     width/2+85-offsetX/2, height/4*3-offsetY, //top right
@@ -51,6 +51,18 @@ function drawStructures() {
   var offsetX = mouseX/16;
   var offsetY = mouseY/16;
   image(barn,width/2-offsetX,height/4*3-138-offsetY);
+
+  //door
+  rectMode(CENTER);
+  if (mouseX < width/2+75-offsetX + 7 && //right bound
+    mouseX > width/2+75-offsetX - 7 && //left bound
+    mouseY < height/4*3-13-offsetY + 13 && //top bound
+    mouseY > height/4*3-13-offsetY - 13) { //bottom bound
+    fill(255, 153, 51);
+  } else {
+    fill(0,0,0);
+  }
+  rect(width/2+75-offsetX, height/4*3-13-offsetY, 14, 26);
 
   //orb
   stroke(255, 153, 51);
@@ -103,7 +115,7 @@ function drawFrontProps() {
 
 function setMood() { //color overlay
   rectMode(CORNER);
-  fill(220,20,0,30);
+  fill(220,20,0,20);
   rect(0,0,width,height);
 }
 
@@ -115,5 +127,17 @@ function Tree(position,width,opacity) {
   }
   this.move = function() {
     posX = 15+(position*40) - mouseX/8;
+  }
+}
+
+function mouseClicked() {
+  var offsetX = mouseX/16;
+  var offsetY = mouseY/16;
+  if (mouseX < width/2+75-offsetX + 7 && //right bound
+    mouseX > width/2+75-offsetX - 7 && //left bound
+    mouseY < height/4*3-13-offsetY + 13 && //top bound
+    mouseY > height/4*3-13-offsetY - 13) { //bottom bound
+
+    window.location = "http://kentuckyroutezero.com/phonebooth.wrongle";
   }
 }
