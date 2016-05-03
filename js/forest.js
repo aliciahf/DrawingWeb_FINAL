@@ -35,7 +35,7 @@ function drawGround() {
   var offsetY = mouseY/16;
   rectMode(CORNER);
   fill(0,0,0);
-  rect(0,height/4*3-offsetY,width,300);
+  rect(0,height/4*3-offsetY,width,height);
 
   //road
   var offsetX = mouseX/8;
